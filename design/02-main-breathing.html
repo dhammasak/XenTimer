@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XenTimer · Main Window — Breathing</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="stage">
+    <div class="stage-header">
+      <div>
+        <div class="t-meta">Mockup 02</div>
+        <h1 class="t-h1">Main Window — Breathing tab</h1>
+      </div>
+      <div class="crumb"><a href="index.html">← All mockups</a></div>
+    </div>
+    <p class="stage-caption">Standalone breathing entry. Quick-start presets at top; custom controls reveal below. Primary accent shifts from sage (focus) to deep navy (breath).</p>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="traffic-lights"><span class="close"></span><span class="min"></span><span class="max"></span></div>
+        <div class="window-title">XenTimer</div>
+      </div>
+
+      <div style="padding: var(--s-5) var(--s-7) 0; display: flex; justify-content: space-between; align-items: center;">
+        <div class="tabs">
+          <button class="tab">Focus</button>
+          <button class="tab active">Breathing</button>
+        </div>
+        <div class="row gap-1">
+          <button class="btn-icon" title="Dashboard">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          </button>
+          <button class="btn-icon" title="History">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </button>
+          <button class="btn-icon" title="Settings">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="window-body" style="padding-top: var(--s-6);">
+
+        <!-- Quick-start row -->
+        <div class="field">
+          <div class="row between">
+            <div class="field-label">Quick start</div>
+            <span class="t-small soft">2 breathing sessions today · 20 min</span>
+          </div>
+          <div class="segments cols-2">
+            <button class="segment active breath" style="padding: var(--s-4); flex-direction: row; align-items: center; gap: var(--s-3);">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--breath); display: flex; align-items: center; justify-content: center;">
+                <svg class="icon" viewBox="0 0 24 24" style="stroke: white;"><circle cx="12" cy="12" r="6"/></svg>
+              </div>
+              <div style="flex: 1;">
+                <div class="segment-title">Box Breathing</div>
+                <div class="segment-meta">4 · 4 · 4 · 4 — Calm & focus</div>
+              </div>
+            </button>
+            <button class="segment" style="padding: var(--s-4); flex-direction: row; align-items: center; gap: var(--s-3);">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--breath-bg); display: flex; align-items: center; justify-content: center;">
+                <svg class="icon" viewBox="0 0 24 24" style="stroke: var(--breath);"><path d="M3 12c3-5 7-5 9 0s6 5 9 0"/></svg>
+              </div>
+              <div style="flex: 1;">
+                <div class="segment-title">Relax Breathing</div>
+                <div class="segment-meta">4 · 0 · 6 · 0 — Wind down</div>
+              </div>
+            </button>
+            <button class="segment" style="padding: var(--s-4); flex-direction: row; align-items: center; gap: var(--s-3);">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--breath-bg); display: flex; align-items: center; justify-content: center;">
+                <svg class="icon" viewBox="0 0 24 24" style="stroke: var(--breath);"><path d="M12 2v6m0 8v6M2 12h6m8 0h6"/></svg>
+              </div>
+              <div style="flex: 1;">
+                <div class="segment-title">4-7-8 Breathing</div>
+                <div class="segment-meta">4 · 7 · 8 · 0 — Stress relief</div>
+              </div>
+            </button>
+            <button class="segment" style="padding: var(--s-4); flex-direction: row; align-items: center; gap: var(--s-3);">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--breath-bg); display: flex; align-items: center; justify-content: center;">
+                <svg class="icon" viewBox="0 0 24 24" style="stroke: var(--breath);"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8" stroke-dasharray="2 3"/></svg>
+              </div>
+              <div style="flex: 1;">
+                <div class="segment-title">Coherent</div>
+                <div class="segment-meta">5 · 0 · 5 · 0 — Balanced</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pattern customizer (collapsible look) -->
+        <div class="card inset">
+          <div class="row between" style="margin-bottom: var(--s-4);">
+            <div>
+              <div class="t-h3" style="color: var(--ink);">Custom pattern</div>
+              <div class="t-small">Adjust the rhythm to your preference</div>
+            </div>
+            <button class="btn btn-ghost t-small">Save preset</button>
+          </div>
+          <div class="row gap-3">
+            <div class="field flex-1">
+              <div class="field-label">Inhale</div>
+              <div class="row gap-1" style="align-items: baseline;">
+                <input class="input" value="4" style="text-align: center; width: 56px;" />
+                <span class="t-small soft">sec</span>
+              </div>
+            </div>
+            <div class="field flex-1">
+              <div class="field-label">Hold</div>
+              <div class="row gap-1" style="align-items: baseline;">
+                <input class="input" value="4" style="text-align: center; width: 56px;" />
+                <span class="t-small soft">sec</span>
+              </div>
+            </div>
+            <div class="field flex-1">
+              <div class="field-label">Exhale</div>
+              <div class="row gap-1" style="align-items: baseline;">
+                <input class="input" value="4" style="text-align: center; width: 56px;" />
+                <span class="t-small soft">sec</span>
+              </div>
+            </div>
+            <div class="field flex-1">
+              <div class="field-label">Rest</div>
+              <div class="row gap-1" style="align-items: baseline;">
+                <input class="input" value="4" style="text-align: center; width: 56px;" />
+                <span class="t-small soft">sec</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Duration + ambient sound + guide -->
+        <div class="row gap-4">
+          <div class="field flex-1">
+            <div class="field-label">Session length</div>
+            <select class="select">
+              <option>3 min — Quick reset</option>
+              <option>5 min — Standard</option>
+              <option selected>10 min — Long</option>
+              <option>15 min — Meditation</option>
+              <option>20 min — Deep relaxation</option>
+              <option>Custom…</option>
+            </select>
+          </div>
+          <div class="field flex-1">
+            <div class="field-label">Ambient sound</div>
+            <select class="select">
+              <option>Ocean</option>
+              <option>Soft rain</option>
+              <option>Meditation bell</option>
+              <option>Breath ambient</option>
+              <option selected>Silence</option>
+            </select>
+          </div>
+          <div class="field flex-1">
+            <div class="field-label">Guide</div>
+            <select class="select">
+              <option>Voice</option>
+              <option selected>Soft bell</option>
+              <option>Visual only</option>
+              <option>Silent</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Start button -->
+        <div class="row center" style="padding-top: var(--s-4); gap: var(--s-3);">
+          <button class="btn btn-secondary">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Preview pattern
+          </button>
+          <button class="btn btn-primary breath btn-large">
+            <svg class="icon" viewBox="0 0 24 24" style="stroke: white; fill: white;"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+            Begin breathing · 10 min
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

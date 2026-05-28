@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XenTimer · Settings</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      min-height: 580px;
+    }
+    .settings-nav {
+      background: var(--surface-2);
+      border-right: 1px solid var(--border);
+      padding: var(--s-5) var(--s-3);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .settings-nav-item {
+      display: flex;
+      align-items: center;
+      gap: var(--s-3);
+      padding: 8px 12px;
+      border-radius: var(--r-md);
+      color: var(--ink-muted);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .settings-nav-item:hover { background: var(--surface-3); color: var(--ink); }
+    .settings-nav-item.active { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+    .settings-content { padding: var(--s-6) var(--s-7); display: flex; flex-direction: column; gap: var(--s-6); overflow-y: auto; }
+
+    .setting-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--s-4);
+      align-items: center;
+      padding: var(--s-3) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-title { font-size: 13px; color: var(--ink); font-weight: 500; }
+    .setting-desc  { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+
+    .toggle {
+      width: 36px;
+      height: 22px;
+      border-radius: var(--r-pill);
+      background: var(--border-strong);
+      position: relative;
+      transition: background var(--t-fast) var(--ease);
+      flex-shrink: 0;
+    }
+    .toggle::after {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+      transition: left var(--t-fast) var(--ease);
+    }
+    .toggle.on { background: var(--focus); }
+    .toggle.on::after { left: 16px; }
+
+    .folder-display {
+      display: flex;
+      align-items: center;
+      gap: var(--s-3);
+      padding: var(--s-3) var(--s-4);
+      background: var(--surface-2);
+      border-radius: var(--r-md);
+      border: 1px solid var(--border);
+    }
+    .folder-display .path {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink);
+      flex: 1;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <div class="stage-header">
+      <div>
+        <div class="t-meta">Mockup 07</div>
+        <h1 class="t-h1">Settings</h1>
+      </div>
+      <div class="crumb"><a href="index.html">← All mockups</a></div>
+    </div>
+    <p class="stage-caption">Tabbed settings — General, Notifications, Markdown, Audio, About. Defaults live here so the Main Window stays minimal.</p>
+
+    <div class="window wide">
+      <div class="window-titlebar">
+        <div class="traffic-lights"><span class="close"></span><span class="min"></span><span class="max"></span></div>
+        <div class="window-title">Settings</div>
+      </div>
+
+      <div class="settings-layout">
+
+        <!-- Nav -->
+        <nav class="settings-nav">
+          <div class="settings-nav-item active">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51"/></svg>
+            General
+          </div>
+          <div class="settings-nav-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Notifications
+          </div>
+          <div class="settings-nav-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Markdown export
+          </div>
+          <div class="settings-nav-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            Audio
+          </div>
+          <div class="settings-nav-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M3 12c3-5 7-5 9 0s6 5 9 0"/></svg>
+            Breathing patterns
+          </div>
+          <div class="settings-nav-item">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            About
+          </div>
+        </nav>
+
+        <!-- Content: General -->
+        <div class="settings-content">
+
+          <section>
+            <div class="t-meta">Section</div>
+            <h2 class="t-h1" style="margin-top: 4px;">General</h2>
+            <p class="t-small" style="margin-top: 6px;">Defaults applied when starting a new session.</p>
+          </section>
+
+          <div class="card">
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Default focus duration</div>
+                <div class="setting-desc">Pre-selected when opening the Focus tab</div>
+              </div>
+              <select class="select" style="width: 180px;">
+                <option>15 min · Short Focus</option>
+                <option selected>25 min · Classic Pomodoro</option>
+                <option>45 min · Deep Work</option>
+                <option>Custom…</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Default break duration</div>
+                <div class="setting-desc">Used when starting a pomodoro break</div>
+              </div>
+              <select class="select" style="width: 180px;">
+                <option>3 min · Short</option>
+                <option selected>5 min · Standard</option>
+                <option>10 min · Long</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Default breathing pattern</div>
+                <div class="setting-desc">Applied to breaks and standalone sessions</div>
+              </div>
+              <select class="select" style="width: 180px;">
+                <option selected>Box Breathing · 4·4·4·4</option>
+                <option>Relax · 4·0·6·0</option>
+                <option>4-7-8</option>
+                <option>Coherent · 5·0·5·0</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Default standalone breathing length</div>
+                <div class="setting-desc">Pre-selected on the Breathing tab</div>
+              </div>
+              <select class="select" style="width: 180px;">
+                <option>5 min</option>
+                <option selected>10 min</option>
+                <option>15 min</option>
+                <option>20 min</option>
+              </select>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Auto-start break after focus</div>
+                <div class="setting-desc">Suggest a guided breathing break when a focus session completes</div>
+              </div>
+              <div class="toggle on"></div>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Prompt for focus rating</div>
+                <div class="setting-desc">Ask 1–10 after each focus session completes</div>
+              </div>
+              <div class="toggle on"></div>
+            </div>
+          </div>
+
+          <section>
+            <h3 class="t-h2">Menu bar</h3>
+          </section>
+          <div class="card">
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Display style</div>
+                <div class="setting-desc">What appears in the macOS menu bar while a session runs</div>
+              </div>
+              <select class="select" style="width: 180px;">
+                <option selected>Label + Time (default)</option>
+                <option>Time only</option>
+                <option>Icon only</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Launch at login</div>
+                <div class="setting-desc">Start XenTimer when you log into macOS</div>
+              </div>
+              <div class="toggle on"></div>
+            </div>
+          </div>
+
+          <section>
+            <h3 class="t-h2">Markdown export <span class="t-small soft" style="font-weight: normal; margin-left: 8px;">(jump to Markdown tab for full options)</span></h3>
+          </section>
+          <div class="card">
+            <div class="field">
+              <div class="field-label">Export folder</div>
+              <div class="folder-display">
+                <svg class="icon" viewBox="0 0 24 24" style="color: var(--ink-muted);"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <span class="path">~/Documents/Obsidian/Tety_Obsidian/Productivity/XenTimer/Daily Reports/</span>
+                <button class="btn btn-secondary">Choose…</button>
+              </div>
+            </div>
+
+            <div class="setting-row" style="margin-top: var(--s-3);">
+              <div>
+                <div class="setting-title">Auto-export daily report</div>
+                <div class="setting-desc">Write today's Markdown report at end of day (23:59) and on quit</div>
+              </div>
+              <div class="toggle on"></div>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Include reflection prompts</div>
+                <div class="setting-desc">Add the "What went well / What interrupted me / What to improve" template</div>
+              </div>
+              <div class="toggle on"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

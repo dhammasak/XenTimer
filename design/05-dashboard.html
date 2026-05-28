@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XenTimer · Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="stage">
+    <div class="stage-header">
+      <div>
+        <div class="t-meta">Mockup 05</div>
+        <h1 class="t-h1">Dashboard — Today</h1>
+      </div>
+      <div class="crumb"><a href="index.html">← All mockups</a></div>
+    </div>
+    <p class="stage-caption">A single glance answers the three questions from the brief: how many sessions did I complete, how well did I focus, did I recover properly?</p>
+
+    <div class="window wide">
+      <div class="window-titlebar">
+        <div class="traffic-lights"><span class="close"></span><span class="min"></span><span class="max"></span></div>
+        <div class="window-title">XenTimer — Dashboard</div>
+      </div>
+
+      <div style="padding: var(--s-5) var(--s-7) 0; display: flex; justify-content: space-between; align-items: center;">
+        <div class="tabs">
+          <button class="tab">Focus</button>
+          <button class="tab">Breathing</button>
+        </div>
+        <div class="row gap-1">
+          <button class="btn-icon" title="Dashboard" style="background: var(--surface-2); color: var(--ink);">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          </button>
+          <button class="btn-icon" title="History">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </button>
+          <button class="btn-icon" title="Settings">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="window-body" style="padding-top: var(--s-5);">
+
+        <!-- Page header -->
+        <div class="row between" style="align-items: flex-end;">
+          <div>
+            <div class="t-meta">Thursday · May 28, 2026</div>
+            <h2 class="t-h1" style="margin-top: 4px;">Today</h2>
+          </div>
+          <div class="row gap-2">
+            <button class="btn btn-ghost">
+              <svg class="icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              Yesterday
+            </button>
+            <button class="btn btn-secondary">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export Markdown
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero stat row -->
+        <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: var(--s-4);">
+          <div class="card">
+            <div class="row between" style="align-items: flex-start;">
+              <div>
+                <div class="stat-label">Focus completed</div>
+                <div class="row gap-2" style="align-items: baseline; margin-top: 4px;">
+                  <span class="stat-value">6</span>
+                  <span class="stat-suffix">sessions</span>
+                </div>
+                <div class="t-small" style="margin-top: var(--s-2);">
+                  <span class="chip focus">+2 vs yesterday</span>
+                </div>
+              </div>
+              <div style="width: 44px; height: 44px; border-radius: var(--r-md); background: var(--focus-soft); display: flex; align-items: center; justify-content: center; color: var(--focus-deep);">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+              </div>
+            </div>
+            <!-- Sparkline -->
+            <div style="margin-top: var(--s-4); display: flex; gap: 4px; align-items: flex-end; height: 32px;">
+              <div style="flex: 1; height: 20%; background: var(--focus-soft); border-radius: 2px;"></div>
+              <div style="flex: 1; height: 60%; background: var(--focus-soft); border-radius: 2px;"></div>
+              <div style="flex: 1; height: 40%; background: var(--focus-soft); border-radius: 2px;"></div>
+              <div style="flex: 1; height: 75%; background: var(--focus-soft); border-radius: 2px;"></div>
+              <div style="flex: 1; height: 50%; background: var(--focus-soft); border-radius: 2px;"></div>
+              <div style="flex: 1; height: 65%; background: var(--focus-soft); border-radius: 2px;"></div>
+              <div style="flex: 1; height: 100%; background: var(--focus); border-radius: 2px;"></div>
+            </div>
+            <div class="t-small soft" style="margin-top: 6px; display: flex; justify-content: space-between;"><span>Fri</span><span>Sat</span><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Today</span></div>
+          </div>
+
+          <div class="card">
+            <div class="stat-label">Focus time</div>
+            <div class="row gap-2" style="align-items: baseline; margin-top: 4px;">
+              <span class="stat-value">2</span><span class="stat-suffix">hr</span>
+              <span class="stat-value">30</span><span class="stat-suffix">min</span>
+            </div>
+            <div class="t-small soft" style="margin-top: var(--s-2);">Break time · 30 min</div>
+          </div>
+
+          <div class="card">
+            <div class="stat-label">Average rating</div>
+            <div class="row gap-2" style="align-items: baseline; margin-top: 4px;">
+              <span class="stat-value">8.2</span>
+              <span class="stat-suffix">/ 10</span>
+            </div>
+            <!-- 10-dot scale -->
+            <div class="row gap-1" style="margin-top: var(--s-3);">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-burgundy);"></span>
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-burgundy);"></span>
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-burgundy);"></span>
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-burgundy);"></span>
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-burgundy);"></span>
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-burgundy);"></span>
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-burgundy);"></span>
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-burgundy);"></span>
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--border-strong);"></span>
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--border-strong);"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary stats: breathing, tags, streak -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--s-4);">
+          <div class="card">
+            <div class="stat-label">Breathing practice</div>
+            <div class="row gap-3" style="align-items: baseline; margin-top: 4px;">
+              <div class="row gap-2" style="align-items: baseline;">
+                <span style="font-family: var(--font-display); font-size: 24px; font-weight: 300; color: var(--ink);">2</span>
+                <span class="t-small">sessions</span>
+              </div>
+              <div style="width: 1px; height: 16px; background: var(--border);"></div>
+              <div class="row gap-2" style="align-items: baseline;">
+                <span style="font-family: var(--font-display); font-size: 24px; font-weight: 300; color: var(--ink);">20</span>
+                <span class="t-small">min</span>
+              </div>
+            </div>
+            <div class="t-small soft" style="margin-top: var(--s-3);">Includes pomodoro breaks + standalone</div>
+          </div>
+
+          <div class="card">
+            <div class="stat-label">Most used tag</div>
+            <div class="row gap-2" style="margin-top: 6px;">
+              <span class="chip focus">Writing</span>
+              <span class="t-small soft">3 sessions · 1h 15m</span>
+            </div>
+            <div class="row gap-2" style="margin-top: var(--s-2);">
+              <span class="chip">Reading</span>
+              <span class="t-small soft">2 sessions · 50m</span>
+            </div>
+            <div class="row gap-2" style="margin-top: var(--s-2);">
+              <span class="chip">Planning</span>
+              <span class="t-small soft">1 session · 25m</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="stat-label">Most used pattern</div>
+            <div class="row gap-2" style="margin-top: 6px;">
+              <span class="chip breath">Box Breathing</span>
+              <span class="t-small soft">2 sessions</span>
+            </div>
+            <div class="row gap-2" style="margin-top: var(--s-3); align-items: center;">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent-burgundy-soft); color: var(--accent-burgundy); display: flex; align-items: center; justify-content: center;">
+                <svg class="icon" viewBox="0 0 24 24"><polyline points="13 17 22 8"/><polyline points="2 12 8 18 13 13"/></svg>
+              </div>
+              <div>
+                <div class="t-small" style="color: var(--ink); font-weight: 500;">Current streak</div>
+                <div class="t-small soft">12 days · best 18</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's timeline -->
+        <div class="card">
+          <div class="row between" style="margin-bottom: var(--s-4);">
+            <div class="t-h3">Today's sessions</div>
+            <a href="#" class="t-small" style="color: var(--ink-muted);">View all →</a>
+          </div>
+          <div class="col gap-2">
+            <div class="row between" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
+              <div class="row gap-3">
+                <span class="t-mono soft" style="width: 90px;">09:00–09:25</span>
+                <span class="chip focus">Writing</span>
+                <span class="t-small">25 min</span>
+              </div>
+              <div class="row gap-3">
+                <span class="t-small soft">Rain · Box (3 min)</span>
+                <span class="chip burgundy">8 / 10</span>
+              </div>
+            </div>
+            <div class="row between" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
+              <div class="row gap-3">
+                <span class="t-mono soft" style="width: 90px;">09:30–09:55</span>
+                <span class="chip">Reading</span>
+                <span class="t-small">25 min</span>
+              </div>
+              <div class="row gap-3">
+                <span class="t-small soft">Brown noise · Box (5 min)</span>
+                <span class="chip burgundy">7 / 10</span>
+              </div>
+            </div>
+            <div class="row between" style="padding: 10px 0; border-bottom: 1px solid var(--border);">
+              <div class="row gap-3">
+                <span class="t-mono soft" style="width: 90px;">10:30–10:40</span>
+                <span class="chip breath">Standalone breath</span>
+                <span class="t-small">10 min</span>
+              </div>
+              <div class="row gap-3">
+                <span class="t-small soft">Ocean · Relax pattern</span>
+                <span class="t-small soft">—</span>
+              </div>
+            </div>
+            <div class="row between" style="padding: 10px 0;">
+              <div class="row gap-3">
+                <span class="t-mono soft" style="width: 90px;">14:00–14:45</span>
+                <span class="chip focus">Deep Work</span>
+                <span class="t-small">45 min</span>
+              </div>
+              <div class="row gap-3">
+                <span class="t-small soft">Silence · Coherent (10 min)</span>
+                <span class="chip burgundy">9 / 10</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

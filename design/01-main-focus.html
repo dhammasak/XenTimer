@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XenTimer · Main Window — Focus</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="stage">
+    <div class="stage-header">
+      <div>
+        <div class="t-meta">Mockup 01</div>
+        <h1 class="t-h1">Main Window — Focus tab</h1>
+      </div>
+      <div class="crumb"><a href="index.html">← All mockups</a></div>
+    </div>
+    <p class="stage-caption">Idle state. User picks a focus duration, optional tag, and ambient sound, then taps Start. Primary action is sage green — the visual signature of focus mode.</p>
+
+    <!-- ===== Window ===== -->
+    <div class="window">
+      <!-- Title bar with traffic lights -->
+      <div class="window-titlebar">
+        <div class="traffic-lights"><span class="close"></span><span class="min"></span><span class="max"></span></div>
+        <div class="window-title">XenTimer</div>
+      </div>
+
+      <!-- Top nav (mode toggle + utility icons) -->
+      <div style="padding: var(--s-5) var(--s-7) 0; display: flex; justify-content: space-between; align-items: center;">
+        <div class="tabs">
+          <button class="tab active">Focus</button>
+          <button class="tab">Breathing</button>
+        </div>
+        <div class="row gap-1">
+          <button class="btn-icon" title="Dashboard">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          </button>
+          <button class="btn-icon" title="History">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </button>
+          <button class="btn-icon" title="Settings">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="window-body" style="padding-top: var(--s-6);">
+
+        <!-- Today's progress chip row -->
+        <div class="row gap-3" style="font-size: 12px; color: var(--ink-muted);">
+          <span><span style="color: var(--ink); font-weight: 600;">3</span> sessions today</span>
+          <span style="color: var(--ink-soft);">•</span>
+          <span><span style="color: var(--ink); font-weight: 600;">1h 15m</span> focused</span>
+          <span style="color: var(--ink-soft);">•</span>
+          <span>Avg rating <span style="color: var(--ink); font-weight: 600;">8.2</span></span>
+        </div>
+
+        <!-- Duration presets -->
+        <div class="field">
+          <div class="field-label">Duration</div>
+          <div class="segments cols-4">
+            <button class="segment">
+              <div class="segment-title">Short</div>
+              <div class="segment-meta">15 min</div>
+            </button>
+            <button class="segment active">
+              <div class="segment-title">Classic</div>
+              <div class="segment-meta">25 min</div>
+            </button>
+            <button class="segment">
+              <div class="segment-title">Deep Work</div>
+              <div class="segment-meta">45 min</div>
+            </button>
+            <button class="segment">
+              <div class="segment-title">Custom</div>
+              <div class="segment-meta">– – min</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Two columns: Tag / Sound -->
+        <div class="row gap-4">
+          <div class="field flex-1">
+            <div class="field-label">Session label</div>
+            <select class="select">
+              <option>Writing</option>
+              <option>Reading</option>
+              <option>Strategy</option>
+              <option>Study</option>
+              <option>Planning</option>
+              <option>Deep Work</option>
+              <option>Admin</option>
+              <option>+ New tag…</option>
+            </select>
+          </div>
+          <div class="field flex-1">
+            <div class="field-label">Background sound</div>
+            <select class="select">
+              <option>Rain (Nature)</option>
+              <option>Forest</option>
+              <option>Brown noise</option>
+              <option>Lo-fi</option>
+              <option>Silence</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Sound volume + voice/bell preview row -->
+        <div class="card inset" style="padding: var(--s-4) var(--s-5);">
+          <div class="row between gap-4">
+            <div class="row gap-3" style="flex: 1; min-width: 0;">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              <input type="range" min="0" max="100" value="60" style="flex: 1; accent-color: var(--focus);" />
+              <span class="t-small" style="color: var(--ink-muted); min-width: 28px; text-align: right;">60</span>
+            </div>
+            <div class="divider vertical" style="height: 20px;"></div>
+            <label class="row gap-2" style="font-size: 12px; color: var(--ink-muted);">
+              <input type="checkbox" checked /> Auto-start break after focus
+            </label>
+          </div>
+        </div>
+
+        <!-- Big Start button -->
+        <div class="row center" style="padding-top: var(--s-4);">
+          <button class="btn btn-primary btn-large">
+            <svg class="icon" viewBox="0 0 24 24" style="stroke: white; fill: white;"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+            Start Focus · 25 min
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Variant: running state -->
+    <div class="stage-caption" style="margin-top: var(--s-9); max-width: 720px;">
+      <div class="t-meta">Variant</div>
+      <h2 class="t-h2" style="color: var(--ink); margin-top: 4px;">During a focus session</h2>
+    </div>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="traffic-lights"><span class="close"></span><span class="min"></span><span class="max"></span></div>
+        <div class="window-title">XenTimer</div>
+      </div>
+
+      <div class="window-body" style="padding: var(--s-8) var(--s-7); align-items: center; gap: var(--s-6);">
+
+        <div class="mode-banner">
+          <span class="mode-dot"></span>
+          <span>Focus session — <strong style="font-weight: 600;">Writing</strong></span>
+        </div>
+
+        <div class="t-display-xl" style="font-variant-numeric: tabular-nums; color: var(--ink);">18:42</div>
+
+        <!-- Progress ring placeholder bar -->
+        <div style="width: 320px; height: 4px; background: var(--surface-2); border-radius: var(--r-pill); overflow: hidden;">
+          <div style="width: 25%; height: 100%; background: var(--focus); border-radius: var(--r-pill);"></div>
+        </div>
+
+        <div class="t-small">6:18 elapsed · ends at 9:25</div>
+
+        <div class="row gap-3" style="margin-top: var(--s-3);">
+          <button class="btn btn-secondary">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            Pause
+          </button>
+          <button class="btn btn-secondary">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"/></svg>
+            Stop
+          </button>
+          <button class="btn btn-secondary">
+            <svg class="icon" viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+            Skip to break
+          </button>
+        </div>
+
+        <div class="row gap-2 t-small" style="color: var(--ink-soft); margin-top: var(--s-2);">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/></svg>
+          <span>Rain · 60%</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

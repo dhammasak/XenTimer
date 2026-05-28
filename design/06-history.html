@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XenTimer · History</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .history-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 0;
+      min-height: 580px;
+    }
+    .history-list {
+      padding: var(--s-5) var(--s-7);
+      overflow-y: auto;
+    }
+    .history-day-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: var(--s-3) 0;
+      margin-top: var(--s-4);
+      border-bottom: 1px solid var(--border);
+    }
+    .history-day-header:first-child { margin-top: 0; }
+    .history-day-header .t-h3 { color: var(--ink); }
+    .history-row {
+      display: grid;
+      grid-template-columns: 80px 1fr auto auto;
+      gap: var(--s-4);
+      align-items: center;
+      padding: var(--s-3) var(--s-2);
+      border-radius: var(--r-md);
+      cursor: pointer;
+    }
+    .history-row:hover { background: var(--surface-2); }
+    .history-row.active { background: var(--focus-soft); }
+    .history-row.active .t-mono { color: var(--focus-deep); }
+    .history-detail {
+      background: var(--surface-2);
+      border-left: 1px solid var(--border);
+      padding: var(--s-6) var(--s-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-5);
+    }
+    .detail-section { display: flex; flex-direction: column; gap: var(--s-2); }
+    .detail-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; color: var(--ink-muted); }
+    .detail-value { font-size: 14px; color: var(--ink); font-weight: 500; }
+    .rating-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: var(--r-pill);
+      background: var(--accent-burgundy-soft);
+      color: var(--accent-burgundy);
+      font-weight: 500;
+      width: fit-content;
+    }
+    .rating-pill .big {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .note-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--s-3) var(--s-4);
+      font-size: 13px;
+      color: var(--ink);
+      line-height: 1.5;
+      font-style: italic;
+    }
+    .note-block::before { content: "“"; color: var(--ink-soft); }
+    .note-block::after  { content: "”"; color: var(--ink-soft); }
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--s-2);
+      padding: var(--s-3) var(--s-7);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <div class="stage-header">
+      <div>
+        <div class="t-meta">Mockup 06</div>
+        <h1 class="t-h1">History</h1>
+      </div>
+      <div class="crumb"><a href="index.html">← All mockups</a></div>
+    </div>
+    <p class="stage-caption">Past sessions grouped by day. Click a row to see details — tag, note, breathing pattern, and rating. Use the day header to export that day's Markdown.</p>
+
+    <div class="window wide">
+      <div class="window-titlebar">
+        <div class="traffic-lights"><span class="close"></span><span class="min"></span><span class="max"></span></div>
+        <div class="window-title">XenTimer — History</div>
+      </div>
+
+      <div style="padding: var(--s-5) var(--s-7) 0; display: flex; justify-content: space-between; align-items: center;">
+        <div class="tabs">
+          <button class="tab">Focus</button>
+          <button class="tab">Breathing</button>
+        </div>
+        <div class="row gap-1">
+          <button class="btn-icon" title="Dashboard">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          </button>
+          <button class="btn-icon" title="History" style="background: var(--surface-2); color: var(--ink);">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </button>
+          <button class="btn-icon" title="Settings">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="row gap-2" style="flex: 1;">
+          <input class="input" placeholder="Search sessions, tags, notes…" style="flex: 1;" />
+          <select class="select" style="width: 140px;">
+            <option>All types</option>
+            <option>Focus only</option>
+            <option>Breathing only</option>
+          </select>
+          <select class="select" style="width: 140px;">
+            <option>Last 7 days</option>
+            <option>Last 30 days</option>
+            <option>This month</option>
+            <option>All time</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="history-layout">
+
+        <!-- LIST -->
+        <div class="history-list">
+
+          <!-- Today -->
+          <div class="history-day-header">
+            <div>
+              <div class="t-h3">Today · May 28</div>
+              <div class="t-small soft">6 focus · 2 breathing · 2h 50m total</div>
+            </div>
+            <button class="btn btn-ghost">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export
+            </button>
+          </div>
+
+          <div class="history-row active">
+            <span class="t-mono soft">09:00</span>
+            <div class="row gap-3">
+              <span class="chip focus">Writing</span>
+              <span class="t-small">25 min · Rain</span>
+            </div>
+            <span class="t-small soft">Box · 3m</span>
+            <span class="chip burgundy">8</span>
+          </div>
+          <div class="history-row">
+            <span class="t-mono soft">09:30</span>
+            <div class="row gap-3">
+              <span class="chip">Reading</span>
+              <span class="t-small">25 min · Brown noise</span>
+            </div>
+            <span class="t-small soft">Box · 5m</span>
+            <span class="chip burgundy">7</span>
+          </div>
+          <div class="history-row">
+            <span class="t-mono soft">10:30</span>
+            <div class="row gap-3">
+              <span class="chip breath">Standalone</span>
+              <span class="t-small">10 min · Ocean</span>
+            </div>
+            <span class="t-small soft">Relax · –</span>
+            <span class="t-small soft">—</span>
+          </div>
+          <div class="history-row">
+            <span class="t-mono soft">14:00</span>
+            <div class="row gap-3">
+              <span class="chip focus">Deep Work</span>
+              <span class="t-small">45 min · Silence</span>
+            </div>
+            <span class="t-small soft">Coherent · 10m</span>
+            <span class="chip burgundy">9</span>
+          </div>
+
+          <!-- Yesterday -->
+          <div class="history-day-header">
+            <div>
+              <div class="t-h3">Wednesday · May 27</div>
+              <div class="t-small soft">4 focus · 1 breathing · 1h 50m total · Avg 7.8</div>
+            </div>
+            <button class="btn btn-ghost">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export
+            </button>
+          </div>
+
+          <div class="history-row">
+            <span class="t-mono soft">08:30</span>
+            <div class="row gap-3">
+              <span class="chip">Planning</span>
+              <span class="t-small">25 min · Forest</span>
+            </div>
+            <span class="t-small soft">Box · 3m</span>
+            <span class="chip burgundy">9</span>
+          </div>
+          <div class="history-row">
+            <span class="t-mono soft">10:00</span>
+            <div class="row gap-3">
+              <span class="chip">Strategy</span>
+              <span class="t-small">25 min · Lo-fi</span>
+            </div>
+            <span class="t-small soft">Box · 5m</span>
+            <span class="chip burgundy">7</span>
+          </div>
+          <div class="history-row">
+            <span class="t-mono soft">15:30</span>
+            <div class="row gap-3">
+              <span class="chip breath">Standalone</span>
+              <span class="t-small">15 min · Meditation bell</span>
+            </div>
+            <span class="t-small soft">4-7-8 · –</span>
+            <span class="t-small soft">—</span>
+          </div>
+
+          <!-- Tuesday -->
+          <div class="history-day-header">
+            <div>
+              <div class="t-h3">Tuesday · May 26</div>
+              <div class="t-small soft">5 focus · 3 breathing · 2h 25m total · Avg 8.0</div>
+            </div>
+            <button class="btn btn-ghost">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export
+            </button>
+          </div>
+        </div>
+
+        <!-- DETAIL -->
+        <aside class="history-detail">
+          <div>
+            <div class="t-meta">Selected · 09:00–09:25</div>
+            <div class="t-h1" style="margin-top: 4px;">Writing</div>
+            <div class="t-small soft" style="margin-top: 2px;">May 28, 2026 · Classic Pomodoro</div>
+          </div>
+
+          <div class="rating-pill">
+            <span class="big">8</span>
+            <span style="font-size: 13px;">/ 10 · Good focus</span>
+          </div>
+
+          <div class="detail-section">
+            <span class="detail-label">Reflection</span>
+            <div class="note-block">Good focus, but interrupted once when a notification slipped through. Try Do Not Disturb next time.</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="detail-section">
+            <span class="detail-label">Focus</span>
+            <div class="row between">
+              <span class="detail-value">25 min</span>
+              <span class="t-small soft">Planned 25 min</span>
+            </div>
+            <div class="row between">
+              <span class="t-small">Background sound</span>
+              <span class="t-small soft">Rain · 60%</span>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <span class="detail-label">Recovery break</span>
+            <div class="row between">
+              <span class="detail-value">3 min</span>
+              <span class="t-small soft">Standard</span>
+            </div>
+            <div class="row between">
+              <span class="t-small">Pattern</span>
+              <span class="t-small soft">Box · 4·4·4·4</span>
+            </div>
+            <div class="row between">
+              <span class="t-small">Guide</span>
+              <span class="t-small soft">Soft bell</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="row gap-2" style="margin-top: auto;">
+            <button class="btn btn-secondary" style="flex: 1;">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Edit note
+            </button>
+            <button class="btn btn-ghost" style="color: #a44;">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+            </button>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

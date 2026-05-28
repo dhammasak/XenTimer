@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XenTimer · Design Mockups</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .hero {
+      width: 100%;
+      max-width: 920px;
+      padding: var(--s-9) 0 var(--s-6);
+      text-align: center;
+    }
+    .hero .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 200;
+      letter-spacing: -0.02em;
+      margin-top: var(--s-3);
+      color: var(--ink);
+    }
+    .hero p {
+      max-width: 540px;
+      margin: var(--s-4) auto 0;
+      color: var(--ink-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .hero .tagline {
+      margin-top: var(--s-4);
+      font-style: italic;
+      color: var(--accent-burgundy);
+      font-size: 14px;
+    }
+
+    .grid {
+      width: 100%;
+      max-width: 920px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s-4);
+    }
+
+    .mockup-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--s-5);
+      text-decoration: none;
+      color: inherit;
+      transition: all var(--t-base) var(--ease);
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-3);
+      cursor: pointer;
+    }
+    .mockup-card:hover {
+      border-color: var(--focus);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-floating);
+    }
+    .mockup-card .number {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+    .mockup-card .title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+    }
+    .mockup-card .desc {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+    .mockup-card .tags {
+      display: flex;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: var(--s-3);
+    }
+    .preview-thumb {
+      height: 120px;
+      border-radius: var(--r-md);
+      background: var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      overflow: hidden;
+      position: relative;
+    }
+    .preview-thumb.focus {
+      background: linear-gradient(135deg, var(--focus-soft) 0%, var(--surface-2) 100%);
+      color: var(--focus-deep);
+    }
+    .preview-thumb.breath {
+      background: linear-gradient(135deg, var(--breath-bg) 0%, var(--surface-2) 100%);
+      color: var(--breath);
+    }
+    .preview-thumb.dark {
+      background: radial-gradient(ellipse at center, #34495F 0%, #1B2939 100%);
+      color: rgba(237, 232, 222, 0.7);
+    }
+    .preview-thumb.menubar {
+      background: linear-gradient(135deg, #4A6178 0%, #2C3E5B 100%);
+      color: white;
+      align-items: flex-start;
+      padding-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+    .preview-thumb.dashboard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .palette-row {
+      width: 100%;
+      max-width: 920px;
+      margin-top: var(--s-8);
+      padding: var(--s-6);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+    }
+    .palette-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--s-3);
+      margin-top: var(--s-4);
+    }
+    .swatch {
+      aspect-ratio: 4/3;
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: flex-end;
+      padding: var(--s-2);
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: white;
+    }
+
+    .footer {
+      width: 100%;
+      max-width: 920px;
+      padding: var(--s-7) 0 var(--s-9);
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 12px;
+    }
+
+    .spec-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-pill);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: var(--s-5);
+    }
+    .spec-link:hover { border-color: var(--ink); }
+  </style>
+</head>
+<body>
+  <main class="stage" style="padding: 0; gap: 0;">
+
+    <div class="hero">
+      <div class="eyebrow">XenTimer · Phase 1 Design</div>
+      <h1>Work with rhythm.<br/>Rest with breath.</h1>
+      <p>Visual exploration for XenTimer — a macOS productivity timer that combines deep focus sessions with guided breathing breaks. Browse the 7 surfaces below to review the look & feel before we move to SwiftUI.</p>
+      <div class="tagline">Productivity through recovery.</div>
+      <a href="design-spec.md" class="spec-link">
+        <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Open design-spec.md
+      </a>
+    </div>
+
+    <div class="grid">
+
+      <a class="mockup-card" href="01-main-focus.html">
+        <div class="preview-thumb focus">
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-display); font-size: 28px; font-weight: 300; color: var(--focus-deep);">Focus · 25 min</div>
+            <div style="margin-top: 4px; font-size: 11px; opacity: 0.7;">Start ▸</div>
+          </div>
+        </div>
+        <div class="number">Mockup 01</div>
+        <div class="title">Main Window — Focus</div>
+        <div class="desc">Picking a focus duration, tag, sound, and starting a Pomodoro session. Shows both idle and running states.</div>
+        <div class="tags"><span class="chip focus">Focus</span><span class="chip">Main</span></div>
+      </a>
+
+      <a class="mockup-card" href="02-main-breathing.html">
+        <div class="preview-thumb breath">
+          <div style="text-align: center;">
+            <div style="font-family: var(--font-display); font-size: 24px; font-weight: 300; color: var(--breath);">Box · Relax · 4-7-8</div>
+            <div style="margin-top: 4px; font-size: 11px; opacity: 0.7;">Begin breathing ▸</div>
+          </div>
+        </div>
+        <div class="number">Mockup 02</div>
+        <div class="title">Main Window — Breathing</div>
+        <div class="desc">Standalone breathing — quick-start presets, custom pattern, ambient sound. The calm sibling of the Focus tab.</div>
+        <div class="tags"><span class="chip breath">Breathing</span><span class="chip">Main</span></div>
+      </a>
+
+      <a class="mockup-card" href="03-menubar.html">
+        <div class="preview-thumb menubar">
+          <div style="background: rgba(255,255,255,0.85); padding: 3px 8px; border-radius: 3px; color: #1c1c1c; display: inline-flex; align-items: center; gap: 6px;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #5C8F7B;"></span>
+            XenTimer · Focus 18:42
+          </div>
+        </div>
+        <div class="number">Mockup 03</div>
+        <div class="title">Menu Bar Timer</div>
+        <div class="desc">Always-visible macOS menu bar status with glanceable dropdown. Four states: focus, break, breathing, idle.</div>
+        <div class="tags"><span class="chip">macOS</span><span class="chip focus">Focus</span><span class="chip breath">Breath</span></div>
+      </a>
+
+      <a class="mockup-card" href="04-breathing-fullscreen.html">
+        <div class="preview-thumb dark">
+          <div style="text-align: center;">
+            <div style="width: 56px; height: 56px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(168, 184, 204, 0.4), rgba(46, 66, 89, 0.85)); box-shadow: 0 0 30px rgba(168, 184, 204, 0.3); margin: 0 auto;"></div>
+            <div style="margin-top: 12px; font-family: var(--font-display); font-size: 16px; font-weight: 200; letter-spacing: 0.05em;">Breathe in</div>
+          </div>
+        </div>
+        <div class="number">Mockup 04</div>
+        <div class="title">Full-screen Breathing</div>
+        <div class="desc">Edge-to-edge immersive mode. The breathing circle is the metronome — expanding and contracting in real time.</div>
+        <div class="tags"><span class="chip breath">Breathing</span><span class="chip">Full-screen</span></div>
+      </a>
+
+      <a class="mockup-card" href="05-dashboard.html">
+        <div class="preview-thumb dashboard">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 16px; width: 100%;">
+            <div style="text-align: center;"><div style="font-family: var(--font-display); font-size: 22px; font-weight: 300; color: var(--ink);">6</div><div style="font-size: 9px; color: var(--ink-muted);">SESSIONS</div></div>
+            <div style="text-align: center;"><div style="font-family: var(--font-display); font-size: 22px; font-weight: 300; color: var(--ink);">2h 30m</div><div style="font-size: 9px; color: var(--ink-muted);">FOCUS TIME</div></div>
+            <div style="text-align: center;"><div style="font-family: var(--font-display); font-size: 22px; font-weight: 300; color: var(--accent-burgundy);">8.2</div><div style="font-size: 9px; color: var(--ink-muted);">RATING</div></div>
+          </div>
+        </div>
+        <div class="number">Mockup 05</div>
+        <div class="title">Dashboard — Today</div>
+        <div class="desc">Glanceable daily summary — sessions, focus time, rating, breathing practice, most-used tag/pattern, current streak.</div>
+        <div class="tags"><span class="chip">Dashboard</span><span class="chip burgundy">Insights</span></div>
+      </a>
+
+      <a class="mockup-card" href="06-history.html">
+        <div class="preview-thumb">
+          <div style="width: 80%; display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted);">09:00</span>
+              <span class="chip focus" style="padding: 2px 6px; font-size: 9px;">Writing</span>
+              <span style="font-size: 10px; color: var(--ink-muted); margin-left: auto;">8/10</span>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted);">09:30</span>
+              <span class="chip" style="padding: 2px 6px; font-size: 9px;">Reading</span>
+              <span style="font-size: 10px; color: var(--ink-muted); margin-left: auto;">7/10</span>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted);">10:30</span>
+              <span class="chip breath" style="padding: 2px 6px; font-size: 9px;">Breath</span>
+              <span style="font-size: 10px; color: var(--ink-muted); margin-left: auto;">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="number">Mockup 06</div>
+        <div class="title">History</div>
+        <div class="desc">Past sessions grouped by day, with detail pane showing rating, reflection note, and breathing pattern. Per-day export.</div>
+        <div class="tags"><span class="chip">History</span><span class="chip">Detail</span></div>
+      </a>
+
+      <a class="mockup-card" href="07-settings.html" style="grid-column: 1 / -1;">
+        <div class="row" style="gap: var(--s-5); align-items: center;">
+          <div class="preview-thumb" style="width: 200px; height: 100px; flex-shrink: 0;">
+            <div style="text-align: center;">
+              <svg class="icon icon-lg" viewBox="0 0 24 24" style="color: var(--ink-muted); margin-bottom: 6px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <div style="font-size: 11px; color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase;">Defaults</div>
+            </div>
+          </div>
+          <div style="flex: 1;">
+            <div class="number">Mockup 07</div>
+            <div class="title" style="margin-top: 6px;">Settings</div>
+            <div class="desc" style="margin-top: 6px;">Defaults for duration, sound, patterns. Notification preferences. Markdown export folder + auto-export toggle. Menu bar display style.</div>
+            <div class="tags" style="padding-top: var(--s-3);"><span class="chip">Preferences</span><span class="chip">Markdown</span><span class="chip">macOS</span></div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Palette -->
+    <div class="palette-row">
+      <div class="row between">
+        <div>
+          <div class="t-meta">Visual language</div>
+          <div class="t-h2" style="margin-top: 4px; color: var(--ink);">Color palette</div>
+          <div class="t-small" style="margin-top: 4px;">Deep navy · warm white · soft grey · soft sage · muted burgundy. Earned accents, neutral chrome.</div>
+        </div>
+      </div>
+      <div class="palette-strip">
+        <div class="swatch" style="background: #1C2330;">Ink<br/>#1C2330</div>
+        <div class="swatch" style="background: #F5F1EA; color: #1C2330;">Warm BG<br/>#F5F1EA</div>
+        <div class="swatch" style="background: #5C8F7B;">Focus<br/>#5C8F7B</div>
+        <div class="swatch" style="background: #2E4259;">Breath<br/>#2E4259</div>
+        <div class="swatch" style="background: #8B5A6B;">Burgundy<br/>#8B5A6B</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      XenTimer · Phase 1 Mockups — built with shared design tokens (<code style="font-family: var(--font-mono); color: var(--ink-muted);">styles.css</code>).<br/>
+      Next: review &amp; iterate, then Phase 2 — Xcode project setup.
+    </div>
+
+  </main>
+</body>
+</html>

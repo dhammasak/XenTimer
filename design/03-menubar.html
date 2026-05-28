@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XenTimer · Menu Bar</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .desktop-bg {
+      width: 100%;
+      max-width: 1200px;
+      height: 360px;
+      background: linear-gradient(135deg, #2C3E5B 0%, #4A6178 50%, #6B8094 100%);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-window);
+    }
+    .macos-menubar {
+      height: 28px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--s-3);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 13px;
+      color: #1c1c1c;
+      gap: var(--s-4);
+      position: relative;
+    }
+    .menubar-left { display: flex; gap: var(--s-4); align-items: center; }
+    .menubar-apple { font-weight: 600; }
+    .menubar-app  { font-weight: 600; }
+    .menubar-right { margin-left: auto; display: flex; gap: var(--s-3); align-items: center; }
+    .menubar-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-variant-numeric: tabular-nums;
+      font-size: 13px;
+    }
+    .menubar-item.active {
+      background: rgba(0,0,0,0.08);
+    }
+    .menubar-icon { width: 14px; height: 14px; }
+    .menubar-time { font-weight: 500; }
+
+    .xentimer-menu-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: default;
+    }
+    .pill-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-focus { background: #5C8F7B; }
+    .dot-break { background: #B68A3E; }
+    .dot-breath { background: #2E4259; }
+    .dot-idle  { background: #A6A99F; }
+
+    /* dropdown menu */
+    .menu-dropdown {
+      position: absolute;
+      top: 32px;
+      width: 280px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 8px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+      padding: 6px;
+      font-size: 13px;
+    }
+    .menu-dropdown .menu-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      border-radius: 4px;
+      gap: var(--s-3);
+      color: #1c1c1c;
+    }
+    .menu-dropdown .menu-row:hover { background: rgba(0,0,0,0.06); }
+    .menu-dropdown .menu-row.header { color: #6E7587; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; padding-top: 8px; padding-bottom: 4px; }
+    .menu-dropdown .menu-row.header:hover { background: transparent; }
+    .menu-divider { height: 1px; background: rgba(0,0,0,0.08); margin: 4px 0; }
+    .menu-time-big {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+      color: #1c1c1c;
+      display: block;
+    }
+    .menu-progress {
+      height: 4px;
+      background: rgba(0,0,0,0.08);
+      border-radius: var(--r-pill);
+      overflow: hidden;
+    }
+    .menu-progress > div {
+      height: 100%;
+      background: #5C8F7B;
+      border-radius: var(--r-pill);
+    }
+    .menu-action-row {
+      display: flex;
+      gap: 6px;
+      padding: 6px 4px;
+    }
+    .menu-action {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(0,0,0,0.04);
+      color: #1c1c1c;
+      font-weight: 500;
+    }
+    .menu-action.primary { background: #5C8F7B; color: white; }
+
+    .variant-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-7);
+      width: 100%;
+      max-width: 1200px;
+    }
+    .variant-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--s-5);
+    }
+    .variant-block-title { font-size: 12px; color: var(--ink-muted); font-weight: 500; margin-bottom: var(--s-3); text-transform: uppercase; letter-spacing: 0.06em; }
+    .variant-strip {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 4px;
+      padding: 2px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+    }
+    .variant-stage {
+      background: linear-gradient(135deg, #2C3E5B, #6B8094);
+      padding: var(--s-3);
+      border-radius: 8px;
+      display: flex;
+      gap: var(--s-3);
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <div class="stage-header">
+      <div>
+        <div class="t-meta">Mockup 03</div>
+        <h1 class="t-h1">Menu Bar Timer</h1>
+      </div>
+      <div class="crumb"><a href="index.html">← All mockups</a></div>
+    </div>
+    <p class="stage-caption">Native macOS menu bar item shows current session and time, with a focused glanceable dropdown for controls. Always visible, never intrusive.</p>
+
+    <!-- Active state with dropdown -->
+    <div class="desktop-bg">
+      <div class="macos-menubar">
+        <div class="menubar-left">
+          <span class="menubar-apple"></span>
+          <span class="menubar-app">Code</span>
+          <span style="color: #555;">File</span>
+          <span style="color: #555;">Edit</span>
+          <span style="color: #555;">View</span>
+        </div>
+        <div class="menubar-right">
+          <span class="xentimer-menu-pill active" style="background: rgba(0,0,0,0.08);">
+            <span class="pill-dot dot-focus"></span>
+            <span>XenTimer · Focus</span>
+            <span class="menubar-time">18:42</span>
+          </span>
+          <span class="menubar-item">
+            <svg class="menubar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12.55a11 11 0 0 1 14 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+          </span>
+          <span class="menubar-item">
+            <svg class="menubar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <span class="menubar-item menubar-time">Thu 28 May  09:18</span>
+        </div>
+
+        <!-- Dropdown -->
+        <div class="menu-dropdown" style="right: 140px;">
+          <div style="padding: var(--s-4) var(--s-3) var(--s-3);">
+            <div class="row gap-2" style="font-size: 11px; color: #6E7587; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;">
+              <span class="pill-dot dot-focus" style="width: 6px; height: 6px;"></span>
+              Focus · Writing
+            </div>
+            <span class="menu-time-big">18:42</span>
+            <div class="t-small" style="color: #6E7587; margin-top: 4px; margin-bottom: var(--s-3);">6:18 elapsed · ends 9:25</div>
+            <div class="menu-progress"><div style="width: 25%;"></div></div>
+          </div>
+
+          <div class="menu-action-row">
+            <button class="menu-action">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              Pause
+            </button>
+            <button class="menu-action">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"/></svg>
+              Stop
+            </button>
+            <button class="menu-action">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+              Skip
+            </button>
+          </div>
+
+          <div class="menu-divider"></div>
+
+          <div class="menu-row">
+            <span>Open XenTimer…</span>
+            <span style="color: #999; font-size: 12px;">⌘O</span>
+          </div>
+          <div class="menu-row">
+            <span>Start breathing session</span>
+            <span style="color: #999; font-size: 12px;">⌘B</span>
+          </div>
+
+          <div class="menu-divider"></div>
+
+          <div class="menu-row header">Today</div>
+          <div class="menu-row" style="color: #6E7587;">
+            <span>3 focus · 2 breathing</span>
+            <span style="color: #6E7587;">1h 35m</span>
+          </div>
+
+          <div class="menu-divider"></div>
+
+          <div class="menu-row">
+            <span>Preferences…</span>
+            <span style="color: #999; font-size: 12px;">⌘,</span>
+          </div>
+          <div class="menu-row" style="color: #b00; ">
+            <span>Quit XenTimer</span>
+            <span style="color: #999; font-size: 12px;">⌘Q</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Variant strip showcase -->
+    <div class="variant-row">
+      <div class="variant-block">
+        <div class="variant-block-title">Menu bar states</div>
+        <div class="variant-stage">
+          <span class="variant-strip"><span class="pill-dot dot-focus"></span>XenTimer · Focus 18:42</span>
+          <span class="variant-strip"><span class="pill-dot dot-break"></span>XenTimer · Break 03:10</span>
+          <span class="variant-strip"><span class="pill-dot dot-breath"></span>XenTimer · Breathing 07:20</span>
+          <span class="variant-strip"><span class="pill-dot dot-idle"></span>XenTimer</span>
+        </div>
+        <div class="t-small" style="margin-top: var(--s-3);">A colored dot prefixes each state. Dot color matches the mode: sage = focus, amber = break, navy = breathing, grey = idle. Time uses tabular numerals.</div>
+      </div>
+
+      <div class="variant-block">
+        <div class="variant-block-title">Display preferences</div>
+        <div class="col gap-2">
+          <label class="row gap-3" style="font-size: 13px;">
+            <input type="radio" name="d" checked /> Icon + label + time <span class="t-small soft" style="margin-left: auto;">Default</span>
+          </label>
+          <label class="row gap-3" style="font-size: 13px;">
+            <input type="radio" name="d" /> Time only <span class="t-small soft" style="margin-left: auto;">Compact</span>
+          </label>
+          <label class="row gap-3" style="font-size: 13px;">
+            <input type="radio" name="d" /> Icon only <span class="t-small soft" style="margin-left: auto;">Minimal</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

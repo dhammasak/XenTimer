@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XenTimer · Full-screen Breathing</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .fullscreen {
+      width: 100%;
+      max-width: 1200px;
+      aspect-ratio: 16 / 10;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      background: radial-gradient(ellipse at center, #34495F 0%, #1B2939 60%, #0E1722 100%);
+      box-shadow: var(--shadow-window);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #EDE8DE;
+      font-family: var(--font-display);
+    }
+    .fs-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--s-6);
+    }
+    .fs-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(237, 232, 222, 0.5);
+      font-weight: 500;
+      font-family: var(--font-ui);
+    }
+    .fs-circle-wrap {
+      width: 320px;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .fs-circle {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(168, 184, 204, 0.4) 0%, rgba(108, 128, 152, 0.6) 50%, rgba(46, 66, 89, 0.85) 100%);
+      box-shadow: 0 0 80px rgba(168, 184, 204, 0.3), inset 0 0 60px rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+    .fs-circle::before {
+      content: "";
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      border: 1px solid rgba(168, 184, 204, 0.15);
+    }
+    .fs-circle::after {
+      content: "";
+      position: absolute;
+      inset: -50px;
+      border-radius: 50%;
+      border: 1px solid rgba(168, 184, 204, 0.08);
+    }
+    .fs-guide-text {
+      font-size: 36px;
+      font-weight: 200;
+      letter-spacing: 0.02em;
+      color: #EDE8DE;
+    }
+    .fs-cycle-time {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      color: rgba(237, 232, 222, 0.6);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.06em;
+    }
+
+    .fs-top {
+      position: absolute;
+      top: var(--s-6);
+      left: 0;
+      right: 0;
+      padding: 0 var(--s-7);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(237, 232, 222, 0.5);
+      font-size: 12px;
+      font-family: var(--font-ui);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+    .fs-bottom {
+      position: absolute;
+      bottom: var(--s-6);
+      left: 0;
+      right: 0;
+      padding: 0 var(--s-7);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-ui);
+      z-index: 3;
+    }
+    .fs-bottom .pattern-stamp {
+      font-size: 12px;
+      color: rgba(237, 232, 222, 0.5);
+      letter-spacing: 0.04em;
+    }
+    .fs-bottom .pattern-stamp strong { color: rgba(237, 232, 222, 0.85); font-weight: 500; }
+    .fs-exit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: var(--r-pill);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(237, 232, 222, 0.7);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      backdrop-filter: blur(20px);
+    }
+    .fs-exit:hover { background: rgba(255,255,255,0.1); color: #EDE8DE; }
+
+    /* Phase strip */
+    .phase-strip {
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s-3);
+    }
+    .phase-card {
+      background: radial-gradient(ellipse at center, #34495F 0%, #1B2939 100%);
+      border-radius: var(--r-lg);
+      padding: var(--s-7) var(--s-4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--s-4);
+      color: #EDE8DE;
+      position: relative;
+      overflow: hidden;
+    }
+    .phase-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(168, 184, 204, 0.45) 0%, rgba(108, 128, 152, 0.6) 50%, rgba(46, 66, 89, 0.85) 100%);
+      box-shadow: 0 0 40px rgba(168, 184, 204, 0.25);
+      transition: transform 600ms var(--ease);
+    }
+    .phase-circle.small { transform: scale(0.55); }
+    .phase-circle.big   { transform: scale(1.0); }
+    .phase-circle.hold-big { transform: scale(1.0); }
+    .phase-name { font-family: var(--font-display); font-size: 18px; font-weight: 300; letter-spacing: 0.02em; }
+    .phase-meta { font-size: 11px; color: rgba(237, 232, 222, 0.5); letter-spacing: 0.06em; text-transform: uppercase; font-family: var(--font-ui); font-weight: 500; }
+    .phase-tag {
+      position: absolute;
+      top: var(--s-3);
+      left: var(--s-3);
+      font-size: 10px;
+      color: rgba(237, 232, 222, 0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: var(--font-ui);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <div class="stage-header">
+      <div>
+        <div class="t-meta">Mockup 04</div>
+        <h1 class="t-h1">Full-screen Breathing Mode</h1>
+      </div>
+      <div class="crumb"><a href="index.html">← All mockups</a></div>
+    </div>
+    <p class="stage-caption">Edge-to-edge. No chrome. The circle is the metronome — it expands and contracts in real time with the breath pattern. Background pulses ±3% luminance with the breath, almost imperceptible.</p>
+
+    <!-- Full-screen hero -->
+    <div class="fullscreen">
+      <div class="fs-top">
+        <span>Box Breathing · 4 · 4 · 4 · 4</span>
+        <span>Cycle 3 of 12</span>
+      </div>
+
+      <div class="fs-content">
+        <div class="fs-eyebrow">Inhale</div>
+        <div class="fs-circle-wrap">
+          <div class="fs-circle"></div>
+        </div>
+        <div class="fs-guide-text">Breathe in</div>
+        <div class="fs-cycle-time">3.2s</div>
+      </div>
+
+      <div class="fs-bottom">
+        <span class="pattern-stamp">Remaining <strong>07:24</strong> · Ambient <strong>Ocean</strong></span>
+        <button class="fs-exit">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          End session · esc
+        </button>
+      </div>
+    </div>
+
+    <!-- Phase strip -->
+    <div class="stage-caption" style="margin-top: var(--s-7); max-width: 1200px;">
+      <div class="t-meta">Animation states</div>
+      <h2 class="t-h2" style="color: var(--ink); margin-top: 4px;">Four phases of one cycle</h2>
+      <p style="margin-top: 4px;">Circle scales between 0.55× (rest) and 1.0× (full inhale). Each phase animation matches its configured duration exactly.</p>
+    </div>
+
+    <div class="phase-strip">
+      <div class="phase-card">
+        <div class="phase-tag">Phase 1 · 4s</div>
+        <div class="phase-circle small" style="transform: scale(0.78);"></div>
+        <div class="phase-name">Breathe in</div>
+        <div class="phase-meta">Inhale · expanding</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-tag">Phase 2 · 4s</div>
+        <div class="phase-circle big"></div>
+        <div class="phase-name">Hold</div>
+        <div class="phase-meta">Hold · steady</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-tag">Phase 3 · 4s</div>
+        <div class="phase-circle" style="transform: scale(0.78);"></div>
+        <div class="phase-name">Breathe out</div>
+        <div class="phase-meta">Exhale · contracting</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-tag">Phase 4 · 4s</div>
+        <div class="phase-circle small"></div>
+        <div class="phase-name">Rest</div>
+        <div class="phase-meta">Rest · steady</div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>
